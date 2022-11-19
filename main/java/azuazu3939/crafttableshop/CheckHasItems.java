@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class CheckHasItems {
 
+    //だいたい完成
     public static boolean hasItemTestA(String configString) {
 
         for (String s : Objects.requireNonNull(CraftTableShop.getInstance().getConfig().getConfigurationSection(configString + ".a")).getKeys(false)) {
@@ -28,59 +29,163 @@ public class CheckHasItems {
         return false;
     }
 
-    public static boolean hasItemTestB(String configString, int amount, String itemString) {
+    public static boolean hasItemTestB(String configString) {
 
-        int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".b");
-        if (amount < i) return false;
-        return CraftTableShop.getInstance().getConfig().isSet(configString + ".b." + i + "." + itemString);
+        for (String s : Objects.requireNonNull(CraftTableShop.getInstance().getConfig().getConfigurationSection(configString + ".b")).getKeys(false)) {
+
+            int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".b." + s);
+            if (!(CTSCancelEvent.CLICK_PLAYER.getInventory().contains(CTSItemInfo.ItemReturner(s)))) return false;
+
+            for (ItemStack itemStack : CTSCancelEvent.CLICK_PLAYER.getInventory().getContents()) {
+
+                if (itemStack == null) continue;
+
+                if (!(CTSItemInfo.ItemReturner(s).isSimilar(itemStack))) continue;
+                int amount = itemStack.getAmount();
+
+                if (!(amount < i)) return true;
+            }
+        }
+        return false;
     }
 
-    public static boolean hasItemTestC(String configString, int amount, String itemString) {
+    public static boolean hasItemTestC(String configString) {
 
-        int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".c");
-        if (amount < i) return false;
-        return CraftTableShop.getInstance().getConfig().isSet(configString + ".c." + i + "." + itemString);
+        for (String s : Objects.requireNonNull(CraftTableShop.getInstance().getConfig().getConfigurationSection(configString + ".c")).getKeys(false)) {
+
+            int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".c." + s);
+            if (!(CTSCancelEvent.CLICK_PLAYER.getInventory().contains(CTSItemInfo.ItemReturner(s)))) return false;
+
+            for (ItemStack itemStack : CTSCancelEvent.CLICK_PLAYER.getInventory().getContents()) {
+
+                if (itemStack == null ) continue;
+
+                if (!(CTSItemInfo.ItemReturner(s).isSimilar(itemStack))) continue;
+                int amount = itemStack.getAmount();
+
+                if (!(amount < i) ) return true;
+            }
+        }
+        return false;
     }
 
-    public static boolean hasItemTestD(String configString, int amount, String itemString) {
+    public static boolean hasItemTestD(String configString) {
 
-        int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".d");
-        if (amount < i) return false;
-        return CraftTableShop.getInstance().getConfig().isSet(configString + ".d." + i + "." + itemString);
+        for (String s : Objects.requireNonNull(CraftTableShop.getInstance().getConfig().getConfigurationSection(configString + ".d")).getKeys(false)) {
+
+            int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".d." + s);
+            if (!(CTSCancelEvent.CLICK_PLAYER.getInventory().contains(CTSItemInfo.ItemReturner(s)))) return false;
+
+            for (ItemStack itemStack : CTSCancelEvent.CLICK_PLAYER.getInventory().getContents()) {
+
+                if (itemStack == null ) continue;
+
+                if (!(CTSItemInfo.ItemReturner(s).isSimilar(itemStack))) continue;
+                int amount = itemStack.getAmount();
+
+                if (!(amount < i) ) return true;
+            }
+        }
+        return false;
     }
 
-    public static boolean hasItemTestE(String configString, int amount, String itemString) {
+    public static boolean hasItemTestE(String configString) {
 
-        int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".e");
-        if (amount < i) return false;
-        return CraftTableShop.getInstance().getConfig().isSet(configString + ".e." + i + "." + itemString);
+        for (String s : Objects.requireNonNull(CraftTableShop.getInstance().getConfig().getConfigurationSection(configString + ".e")).getKeys(false)) {
+
+            int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".e." + s);
+            if (!(CTSCancelEvent.CLICK_PLAYER.getInventory().contains(CTSItemInfo.ItemReturner(s)))) return false;
+
+            for (ItemStack itemStack : CTSCancelEvent.CLICK_PLAYER.getInventory().getContents()) {
+
+                if (itemStack == null ) continue;
+
+                if (!(CTSItemInfo.ItemReturner(s).isSimilar(itemStack))) continue;
+                int amount = itemStack.getAmount();
+
+                if (!(amount < i) ) return true;
+            }
+        }
+        return false;
     }
 
-    public static boolean hasItemTestF(String configString, int amount, String itemString) {
+    public static boolean hasItemTestF(String configString) {
 
-        int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".f");
-        if (amount < i) return false;
-        return CraftTableShop.getInstance().getConfig().isSet(configString + ".f." + i + "." + itemString);
+        for (String s : Objects.requireNonNull(CraftTableShop.getInstance().getConfig().getConfigurationSection(configString + ".f")).getKeys(false)) {
+
+            int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".f." + s);
+            if (!(CTSCancelEvent.CLICK_PLAYER.getInventory().contains(CTSItemInfo.ItemReturner(s)))) return false;
+
+            for (ItemStack itemStack : CTSCancelEvent.CLICK_PLAYER.getInventory().getContents()) {
+
+                if (itemStack == null ) continue;
+
+                if (!(CTSItemInfo.ItemReturner(s).isSimilar(itemStack))) continue;
+                int amount = itemStack.getAmount();
+
+                if (!(amount < i) ) return true;
+            }
+        }
+        return false;
     }
 
-    public static boolean hasItemTestG(String configString, int amount, String itemString) {
+    public static boolean hasItemTestG(String configString) {
 
-        int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".g");
-        if (amount < i) return false;
-        return CraftTableShop.getInstance().getConfig().isSet(configString + ".g." + i + "." + itemString);
+        for (String s : Objects.requireNonNull(CraftTableShop.getInstance().getConfig().getConfigurationSection(configString + ".g")).getKeys(false)) {
+
+            int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".g." + s);
+            if (!(CTSCancelEvent.CLICK_PLAYER.getInventory().contains(CTSItemInfo.ItemReturner(s)))) return false;
+
+            for (ItemStack itemStack : CTSCancelEvent.CLICK_PLAYER.getInventory().getContents()) {
+
+                if (itemStack == null ) continue;
+
+                if (!(CTSItemInfo.ItemReturner(s).isSimilar(itemStack))) continue;
+                int amount = itemStack.getAmount();
+
+                if (!(amount < i) ) return true;
+            }
+        }
+        return false;
     }
 
-    public static boolean hasItemTestH(String configString, int amount, String itemString) {
+    public static boolean hasItemTestH(String configString) {
 
-        int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".h");
-        if (amount < i) return false;
-        return CraftTableShop.getInstance().getConfig().isSet(configString + ".h." + i + "." + itemString);
+        for (String s : Objects.requireNonNull(CraftTableShop.getInstance().getConfig().getConfigurationSection(configString + ".h")).getKeys(false)) {
+
+            int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".h." + s);
+            if (!(CTSCancelEvent.CLICK_PLAYER.getInventory().contains(CTSItemInfo.ItemReturner(s)))) return false;
+
+            for (ItemStack itemStack : CTSCancelEvent.CLICK_PLAYER.getInventory().getContents()) {
+
+                if (itemStack == null ) continue;
+
+                if (!(CTSItemInfo.ItemReturner(s).isSimilar(itemStack))) continue;
+                int amount = itemStack.getAmount();
+
+                if (!(amount < i) ) return true;
+            }
+        }
+        return false;
     }
 
-    public static boolean hasItemTestI(String configString, int amount, String itemString) {
+    public static boolean hasItemTestI(String configString) {
 
-        int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".i");
-        if (amount < i) return false;
-        return CraftTableShop.getInstance().getConfig().isSet(configString + ".i." + i + "." + itemString);
+        for (String s : Objects.requireNonNull(CraftTableShop.getInstance().getConfig().getConfigurationSection(configString + ".i")).getKeys(false)) {
+
+            int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".i." + s);
+            if (!(CTSCancelEvent.CLICK_PLAYER.getInventory().contains(CTSItemInfo.ItemReturner(s)))) return false;
+
+            for (ItemStack itemStack : CTSCancelEvent.CLICK_PLAYER.getInventory().getContents()) {
+
+                if (itemStack == null ) continue;
+
+                if (!(CTSItemInfo.ItemReturner(s).isSimilar(itemStack))) continue;
+                int amount = itemStack.getAmount();
+
+                if (!(amount < i) ) return true;
+            }
+        }
+        return false;
     }
 }
