@@ -35,9 +35,9 @@ public class CTSCommand implements CommandExecutor {
             string = args[0];
             if (string.equals("reload") || string.equals("Reload") || string.equals("RELOAD")) {
 
-                CraftTableShop.getInstance().reloadConfig();
                 CraftTableShop.getInstance().saveConfig();
                 CraftTableShop.getInstance().saveDefaultConfig();
+                CraftTableShop.getInstance().reloadConfig();
                 player.sendMessage(ChatColor.WHITE + "コンフィグをリロードしました。");
                 return true;
             }
@@ -72,16 +72,16 @@ public class CTSCommand implements CommandExecutor {
                     if (!tag.getString("MYTHIC_TYPE").equals(mm)) continue;
 
                     CraftTableShop.getInstance().getSetUpConfig().getConfig().set(type, mm);
-                    CraftTableShop.getInstance().getSetUpConfig().saveConfig();
-                    CraftTableShop.getInstance().getSetUpConfig().saveDefaultConfig();
+                    CraftTableShop.getInstance().saveConfig();
+                    CraftTableShop.getInstance().saveDefaultConfig();
 
                     sender.sendMessage(ChatColor.GREEN + "手に持っているアイテムを" + type + "という名前で登録しました。(MythicMobs)");
                     return true;
                 }
             }
             CraftTableShop.getInstance().getSetUpConfig().getConfig().set(type, itemStack);
-            CraftTableShop.getInstance().getSetUpConfig().saveConfig();
-            CraftTableShop.getInstance().getSetUpConfig().saveDefaultConfig();
+            CraftTableShop.getInstance().saveConfig();
+            CraftTableShop.getInstance().saveDefaultConfig();
 
             sender.sendMessage(ChatColor.GREEN + "手に持っているアイテムを" + type + "という名前で登録しました。");
             return true;

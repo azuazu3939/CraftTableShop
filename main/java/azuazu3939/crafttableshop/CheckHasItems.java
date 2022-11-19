@@ -1,24 +1,31 @@
 package azuazu3939.crafttableshop;
 
-import com.sun.source.tree.BreakTree;
+import org.bukkit.inventory.ItemStack;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class CheckHasItems {
 
-    //完璧
-    public static boolean hasItemTestA(String configString, int amount, String itemString) {
+    public static boolean hasItemTestA(String configString) {
 
-        /* int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".a");
-        if (amount < i) return false;
-        if (CraftTableShop.getInstance().getConfig().isSet(configString + ".a." + i) &&
-                Objects.equals(CraftTableShop.getInstance().getConfig().getString(configString + ".a." + i), itemString)) {
+        for (String s : Objects.requireNonNull(CraftTableShop.getInstance().getConfig().getConfigurationSection(configString + ".a")).getKeys(false)) {
 
-            return true;
-        } */
-        int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".a");
-        if (amount < i) return false;
-        return CraftTableShop.getInstance().getConfig().isSet(configString + ".a." + i);
+            int i = CraftTableShop.getInstance().getConfig().getInt(configString + ".a." + s);
+            if (!(CTSCancelEvent.CLICK_PLAYER.getInventory().contains(CTSItemInfo.ItemReturner(s)))) return false;
+
+            for (ItemStack itemStack : CTSCancelEvent.CLICK_PLAYER.getInventory().getContents()) {
+
+                if (itemStack == null ) continue;
+
+                if (!(CTSItemInfo.ItemReturner(s).isSimilar(itemStack))) continue;
+                int amount = itemStack.getAmount();
+
+                if (!(amount < i) ) return true;
+            }
+        }
+        return false;
     }
 
     public static boolean hasItemTestB(String configString, int amount, String itemString) {

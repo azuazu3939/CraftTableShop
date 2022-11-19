@@ -16,25 +16,5 @@ free_field: GOLDEN_SWORD
        #"ぺ" <- CraftData.yml ItemTitle String
 
 
-Test:
-  a:
-    1:
-      "ぺ"
-  b:
-    2:
-      "ぱ"
-  c:
-    5:
-      "ぴ"
-  d:
-    7:
-      "ぷ"
-  e:
-    1:
-      "ぺ"
-  f:
-    4:
-      "ぱ"
-  g:
-  h:
-  i:
+Test.a.ぺ: 2
+Test.b.ぽ: 1

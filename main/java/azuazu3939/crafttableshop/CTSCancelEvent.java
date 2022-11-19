@@ -36,7 +36,7 @@ public class CTSCancelEvent implements Listener {
         if (event.getCurrentItem().isSimilar(CTSItemInfo.ItemReturner("ぷ"))) {
 
             CLICK_PLAYER = event.getWhoClicked();
-           if (CheckHasItems.hasItemTestA("Test", 1, "ぷ")) {
+           if (CheckHasItems.hasItemTestA("Test")) {
 
                CLICK_PLAYER.sendMessage("おめ");
            }

@@ -3,9 +3,8 @@ package azuazu3939.crafttableshop;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Objects;
+import java.io.File;
+import java.io.IOException;
 
 public class SetUpConfig {
     private CraftTableShop plugin;
@@ -42,15 +41,6 @@ public class SetUpConfig {
             this.file = new File(plugin.getDataFolder() + File.separator + this.folderpath, this.path);
         }
         this.config = YamlConfiguration.loadConfiguration(this.file);
-        Reader defaultConfigStream;
-        try {
-            defaultConfigStream = new InputStreamReader(Objects.requireNonNull(plugin.getResource(this.path)), StandardCharsets.UTF_8);
-            YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(defaultConfigStream);
-            config.setDefaults(defaultConfig);
-        }catch(NullPointerException ex) {
-            ex.printStackTrace();
-        }
-
     }
 
     public void saveConfig() {
