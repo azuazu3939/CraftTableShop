@@ -1,0 +1,40 @@
+
+other: GRAY_STAINED_GLASS_PANE
+
+#MenuType
+free_field: GOLDEN_SWORD
+
+#############
+# a   b   c #
+# d   e   f #  #<- CraftSlotNumber
+# g   h   i #
+#############
+
+#Test: <- TitleName String
+  #a:  <- CraftSlotNumber String
+    #16: <- Material Amount int
+       #"ぺ" <- CraftData.yml ItemTitle String
+
+
+Test:
+  a:
+    1:
+      "ぺ"
+  b:
+    2:
+      "ぱ"
+  c:
+    5:
+      "ぴ"
+  d:
+    7:
+      "ぷ"
+  e:
+    1:
+      "ぺ"
+  f:
+    4:
+      "ぱ"
+  g:
+  h:
+  i:

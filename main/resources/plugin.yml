@@ -1,0 +1,10 @@
+name: CraftTableShop
+version: '${project.version}'
+main: azuazu3939.crafttableshop.CraftTableShop
+api-version: 1.15
+
+commands:
+  crafttableshop:
+    permission: crafttableshop.command.crafttableshop
+    aliases: [cts, CTS, Cts]
+    description: "crafttableshopのメインコマンド。"
