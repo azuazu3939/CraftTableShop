@@ -12,17 +12,17 @@ public class CTSMenu {
         player.openInventory(inventoryType);
     }
 
-    public static Inventory openMenuFF() {
+    public static Inventory openMenuSub() {
 
-        Inventory inventory = CTSItem.FFMenu();
+        Inventory inventory = CTSItem.SubMenu();
         CTSCancelEvent.CLICK_PLAYER.openInventory(inventory);
 
         return inventory;
     }
 
-    public static Inventory openTest() {
+    public static Inventory openMenuCraft() {
 
-        Inventory inventory = CTSItem.TestMenu();
+        Inventory inventory = CTSItem.CraftMenu();
         CTSCancelEvent.CLICK_PLAYER.openInventory(inventory);
 
         return inventory;

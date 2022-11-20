@@ -1,0 +1,23 @@
+other: GRAY_STAINED_GLASS_PANE
+
+MainMenu:
+  FFMenu:
+    ==: org.bukkit.inventory.ItemStack
+    v: 2230
+    type: GOLDEN_SWORD
+    meta:
+      ==: ItemMeta
+      meta-type: UNSPECIFIC
+      display-name: §bFFMenu
+      lore:
+      - §fクリックでFFMenuを開きます
+
+
+
+
+SubMenu:
+  FFMenu:
+    TestItem:
+      ==: org.bukkit.inventory.ItemStack
+      v: 2230
+      type: DIAMOND_HELMET

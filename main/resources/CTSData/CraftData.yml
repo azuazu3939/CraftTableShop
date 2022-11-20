@@ -1,0 +1,11 @@
+CraftData:
+  FF:
+    TestItem:
+      ==: org.bukkit.inventory.ItemStack
+      v: 2230
+      type: ENCHANTED_BOOK
+      meta:
+        ==: ItemMeta
+        meta-type: ENCHANTED
+        stored-enchants:
+          PROTECTION_FIRE: 4
