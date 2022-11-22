@@ -11,8 +11,10 @@ public final class CraftTableShop extends JavaPlugin {
     private File customConfigFile;
     private final SetUpConfig craftDataConfig = new SetUpConfig(this, "CraftData.yml", "CTSData");
     private final SetUpConfig menuConfig = new SetUpConfig(this, "MenuData.yml", "CTSData");
+    private final SetUpConfig recipeConfig = new SetUpConfig(this, "CraftRecipe.yml", "CTSData");
 
-    public CraftTableShop() {instance = this;}
+    public CraftTableShop() {
+        instance = this;}
 
     public static CraftTableShop getInstance() {
         return instance;
@@ -21,9 +23,17 @@ public final class CraftTableShop extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        craftDataConfig.create();
+        menuConfig.create();
+        recipeConfig.create();
+
         createCustomConfig();
         createMenuConfig();
-        craftDataConfig.create();
+        createRecipeConfig();
+        craftDataConfig.saveDefaultConfig();
+        menuConfig.saveDefaultConfig();
+        recipeConfig.saveDefaultConfig();
+
         saveDefaultConfig();
         saveConfig();
 
@@ -52,6 +62,16 @@ public final class CraftTableShop extends JavaPlugin {
         }
     }
 
+    private void createRecipeConfig() {
+
+        customConfigFile = new File(getDataFolder(), "CraftRecipe.yml");
+
+        if (customConfigFile.exists()) {
+
+            saveResource("CraftRecipe.yml", true);
+        }
+    }
+
     public SetUpConfig getSetUpConfig() {
         return craftDataConfig;
     }
@@ -60,6 +80,9 @@ public final class CraftTableShop extends JavaPlugin {
         return menuConfig;
     }
 
+    public SetUpConfig getCraftRecipeConfig() {
+        return recipeConfig;
+    }
 
     @Override
     public void onDisable() {

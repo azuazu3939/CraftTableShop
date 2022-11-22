@@ -8,8 +8,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.ItemStack;
 
-import static azuazu3939.crafttableshop.CTSItem.*;
-
 public class CTSCancelEvent implements Listener {
 
     static HumanEntity CLICK_PLAYER;
@@ -23,39 +21,57 @@ public class CTSCancelEvent implements Listener {
         CLICK_PLAYER = event.getWhoClicked();
         CLICKED_MENU = event.getView().getTitle();
 
-        if (event.getView().getTitle().equals("MainMenu") || CTSItem.MainMenuItemName() || CTSItem.SubMenuItemName()) {
+        if (CLICK_ITEM == null) return;
+        if (CLICKED_MENU == null) return;
+        if ((event.getView().getTitle().equals("CTSMenu") || CTSItem.MainMenuItemName() || CTSItem.SubMenuItemName())) {
 
             event.setCancelled(true);
-        }
 
-        if (event.getCurrentItem() == null) return;
-        if (CTSItem.MainMenuClickItemList()) {
+            if (CTSItem.MainMenuClickItemList()) {
 
-            CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 5F, 0.5F);
-            CLICK_PLAYER.openInventory(CTSMenu.openMenuSub());
-        }
-        if (CTSItem.SubMenuClickItemList()) {
+                CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1F, 1.5F);
+                CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1F, 1.5F);
+                CLICK_PLAYER.openInventory(CTSMenu.openMenuSub());
+            }
+            if (CTSItem.SubMenuClickItemList()) {
 
-            CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 5F, 0.5F);
-            CLICK_PLAYER.openInventory(CTSMenu.openMenuCraft());
-        }
-        if (CTSItem.CraftMenuItemName() || event.getSlot() == 34) {
+                CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1F, 1.5F);
+                CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1F, 1.5F);
+                CLICK_PLAYER.openInventory(CTSMenu.openMenuCraft());
+            }
+            if (CTSItem.CraftMenuItemName() || event.getSlot() == 34) {
 
-           if (CheckHasItems.hasItemTestA(CLICKED_MENU) &&
-                   CheckHasItems.hasItemTestB(CLICKED_MENU)&&
-                   CheckHasItems.hasItemTestC(CLICKED_MENU)&&
-                   CheckHasItems.hasItemTestD(CLICKED_MENU)&&
-                   CheckHasItems.hasItemTestE(CLICKED_MENU)&&
-                   CheckHasItems.hasItemTestF(CLICKED_MENU)&&
-                   CheckHasItems.hasItemTestG(CLICKED_MENU)&&
-                   CheckHasItems.hasItemTestH(CLICKED_MENU)&&
-                   CheckHasItems.hasItemTestI(CLICKED_MENU)) {
+                for (String string : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData").getKeys(false)) {
 
-               CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 5F, 0.5F);
-               CLICK_PLAYER.sendMessage("おめ");
-           }
+                    if (string == null) continue;
+
+                    for (String string2 : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData." + string).getKeys(false)) {
+
+                        if (string2 == null) continue;
+
+                        if (CLICK_ITEM.isSimilar(CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + string + "." + string2))) {
+
+                            if (CheckHasItems.hasItemTestA(string) &&
+                                    CheckHasItems.hasItemTestB(string) &&
+                                    CheckHasItems.hasItemTestC(string) &&
+                                    CheckHasItems.hasItemTestD(string) &&
+                                    CheckHasItems.hasItemTestE(string) &&
+                                    CheckHasItems.hasItemTestF(string) &&
+                                    CheckHasItems.hasItemTestG(string) &&
+                                    CheckHasItems.hasItemTestH(string) &&
+                                    CheckHasItems.hasItemTestI(string)) {
+
+                                CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 5F, 0.5F);
+                                CLICK_PLAYER.sendMessage("おめ");
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
+
     @EventHandler
     public void onInvDrag(InventoryDragEvent event) {
 

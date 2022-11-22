@@ -1,5 +1,6 @@
 package azuazu3939.crafttableshop;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 

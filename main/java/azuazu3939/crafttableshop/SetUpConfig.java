@@ -7,9 +7,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class SetUpConfig {
-    private CraftTableShop plugin;
-    private String path;
-    private String folderpath;
+    private final CraftTableShop plugin;
+    private final String path;
+    private final String folderpath;
     private File file;
     private FileConfiguration config;
 
