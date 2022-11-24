@@ -7,6 +7,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.ItemStack;
 
+import static azuazu3939.crafttableshop.CTSItemInfo.subOrCraftReturner;
+import static azuazu3939.crafttableshop.checkHasItems.checkFinal;
+
 public class CTSCancelEvent implements Listener {
 
     static HumanEntity CLICK_PLAYER;
@@ -23,31 +26,31 @@ public class CTSCancelEvent implements Listener {
 
         CLICK_MENU = event.getView().getTitle();
 
-        if (CTSItemInfo.checkTitleReturner() == null || CTSItemInfo.checkTitleReturner().equals("null")) return;
+        if (CTSItemInfo.checkTitleReturner().equals("null")) return;
         if (CLICK_ITEM == null) return;
         if (!CTSItemInfo.checkTitleReturner().equals(CLICK_MENU)) return;
 
         event.setCancelled(true);
 
-        if (CTSItemInfo.titleReturner() == null || CTSItemInfo.titleReturner().equals("null")) return;
-        if (CTSItemInfo.itemReturner(CLICK_ITEM, CLICK_MENU) || CTSItemInfo.subOrCraftReturner().equals("true") && !CTSItemInfo.subOrCraftReturner().equals("true2")) {
+        if (CTSItemInfo.itemReturner(CLICK_ITEM, CLICK_MENU) && subOrCraftReturner().equals("true")) {
 
-            CLICK_PLAYER.sendMessage("おめ");
             CTSMenu.openMenuSub(CLICK_PLAYER);
-            return;
         }
 
-        if (CTSItemInfo.itemReturner(CLICK_ITEM, CLICK_MENU) || CTSItemInfo.subOrCraftReturner().equals("true2") && !CTSItemInfo.subOrCraftReturner().equals("true")) {
+        if (CTSItemInfo.itemReturner(CLICK_ITEM, CLICK_MENU) && subOrCraftReturner().equals("true2")) {
 
-            CLICK_PLAYER.sendMessage("おめ");
             CTSMenu.openMenuCraft(CLICK_PLAYER);
+        }
+        if (event.getSlot() == 34 && subOrCraftReturner().equals("true3")) {
+
+            if (checkFinal()) CLICK_PLAYER.sendMessage("おめ");
         }
     }
 
     @EventHandler
     public void onInvDrag(InventoryDragEvent event) {
 
-        if (CTSItemInfo.checkTitleReturner() == null || CTSItemInfo.checkTitleReturner().equals("null")) return;
+        if (CTSItemInfo.checkTitleReturner().equals("null")) return;
         if (CLICK_ITEM == null) return;
         if (!CTSItemInfo.checkTitleReturner().equals(CLICK_MENU)) return;
 

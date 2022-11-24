@@ -2,28 +2,23 @@ package azuazu3939.crafttableshop;
 
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
+
+import static azuazu3939.crafttableshop.checkInvHolder.*;
 
 public class CTSMenu {
 
     public static void openMenu(Player player) {
 
-        Inventory inventory = CTSItem.mainMenu();
-
-        player.openInventory(inventory);
+        player.openInventory(CTSInventory(createInvMain()));
     }
 
     public static void openMenuSub(HumanEntity player) {
 
-        Inventory inventory = CTSItem.subMenu();
-
-        player.openInventory(inventory);
+       player.openInventory(CTSInventory(createInvSub()));
     }
 
     public static void openMenuCraft(HumanEntity player) {
 
-        Inventory inventory = CTSItem.craftMenu();
-
-        player.openInventory(inventory);
+        player.openInventory(CTSInventory(createInvCraft()));
     }
 }

@@ -16,7 +16,6 @@ public class CTSCommand implements CommandExecutor {
     String string;
     String type;
     Player playername;
-    String Id;
     String set;
 
     //完成
@@ -110,7 +109,7 @@ public class CTSCommand implements CommandExecutor {
                         return true;
                     }
 
-                    if (!(craftTableShop.getInstance().getConfig().isSet("MainCraft" + set + ".Item"))) {
+                    if (!(craftTableShop.getInstance().getConfig().isSet("MainCraft." + set + ".Item"))) {
                         playername.sendMessage(ChatColor.RED + set + "は登録されていません。");
                         return true;
                     }
@@ -154,7 +153,7 @@ public class CTSCommand implements CommandExecutor {
     private void howToUse(Player sender) {
 
         sender.sendMessage("正しく入力しよう！");
-        sender.sendMessage("/cts add <ItemPath> <ItemName> メインハンドアイテムを反映。最初にやるやつ");
+        sender.sendMessage("/cts add <ItemPath> メインハンドアイテムを反映。最初にやるやつ");
         sender.sendMessage("/cts reload");
         sender.sendMessage("/cts menu <name>");
         sender.sendMessage("/cts get <name> <ItemPath>");
