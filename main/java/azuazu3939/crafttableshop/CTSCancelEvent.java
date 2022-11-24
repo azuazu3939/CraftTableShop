@@ -29,15 +29,15 @@ public class CTSCancelEvent implements Listener {
 
         event.setCancelled(true);
 
-        if (CTSItemInfo.TitleReturner() == null || CTSItemInfo.TitleReturner().equals("null")) return;
-        if (CTSItemInfo.ItemReturner(CLICK_ITEM, CLICK_MENU) || CTSItemInfo.SubOrCraftReturner().equals("true") && !CTSItemInfo.SubOrCraftReturner().equals("true2")) {
+        if (CTSItemInfo.titleReturner() == null || CTSItemInfo.titleReturner().equals("null")) return;
+        if (CTSItemInfo.itemReturner(CLICK_ITEM, CLICK_MENU) || CTSItemInfo.subOrCraftReturner().equals("true") && !CTSItemInfo.subOrCraftReturner().equals("true2")) {
 
             CLICK_PLAYER.sendMessage("おめ");
             CTSMenu.openMenuSub(CLICK_PLAYER);
             return;
         }
 
-        if (CTSItemInfo.ItemReturner(CLICK_ITEM, CLICK_MENU) || CTSItemInfo.SubOrCraftReturner().equals("true2") && !CTSItemInfo.SubOrCraftReturner().equals("true")) {
+        if (CTSItemInfo.itemReturner(CLICK_ITEM, CLICK_MENU) || CTSItemInfo.subOrCraftReturner().equals("true2") && !CTSItemInfo.subOrCraftReturner().equals("true")) {
 
             CLICK_PLAYER.sendMessage("おめ");
             CTSMenu.openMenuCraft(CLICK_PLAYER);

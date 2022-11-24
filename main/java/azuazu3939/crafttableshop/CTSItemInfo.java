@@ -7,9 +7,9 @@ import org.bukkit.inventory.ItemStack;
 public class CTSItemInfo {
     //完璧
 
-    public static boolean ItemReturner(ItemStack item, String group) { //そのTitleがある場合trueを返す奴
+    public static boolean itemReturner(ItemStack item, String group) { //そのTitleがある場合trueを返す奴
 
-        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+        FileConfiguration info = craftTableShop.getInstance().getConfig();
 
         if (group == null) return false;
         for (String string : info.getConfigurationSection(group).getKeys(false)) {
@@ -22,10 +22,10 @@ public class CTSItemInfo {
         return false;
     }
 
-    public static String TitleReturner() {  //次のTitleを返すやつ
+    public static String titleReturner() {  //次のTitleを返すやつ
 
         String s = "null";
-        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+        FileConfiguration info = craftTableShop.getInstance().getConfig();
         String string = CTSCancelEvent.CLICK_MENU;
 
         for (String str : info.getConfigurationSection("MainCraft").getKeys(false)) {
@@ -55,7 +55,7 @@ public class CTSItemInfo {
     public static String checkTitleReturner() { //今のTitleを確認し返す奴
 
         String s = "null";
-        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+        FileConfiguration info = craftTableShop.getInstance().getConfig();
         String string = CTSCancelEvent.CLICK_MENU;
 
         if (string.equals("MainCraft")) return "MainCraft";
@@ -84,10 +84,10 @@ public class CTSItemInfo {
         return s;
     }
 
-    public static String SubOrCraftReturner() {
+    public static String subOrCraftReturner() {
 
         String s = "null";
-        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+        FileConfiguration info = craftTableShop.getInstance().getConfig();
 
         for (String s1 : info.getConfigurationSection("MainCraft").getKeys(false)) {
 

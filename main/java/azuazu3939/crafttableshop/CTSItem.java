@@ -14,7 +14,7 @@ public class CTSItem {
 
     static Material other = Material.GRAY_STAINED_GLASS_PANE;
 
-    public static ItemStack ItemSlot() {
+    public static ItemStack itemSlot() {
 
         ItemStack itemStack = new ItemStack(other);
         ItemMeta meta = itemStack.getItemMeta();
@@ -24,10 +24,10 @@ public class CTSItem {
         return itemStack;
     }
 
-    public static ArrayList<ItemStack> MainMenuItemList() {
+    public static ArrayList<ItemStack> mainMenuItemList() {
 
         ArrayList<ItemStack> list = new ArrayList<>();
-        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+        FileConfiguration info = craftTableShop.getInstance().getConfig();
 
         for (String string : info.getConfigurationSection("MainCraft").getKeys(false)) {
 
@@ -40,37 +40,37 @@ public class CTSItem {
         return list;
     }
 
-    public static ArrayList<ItemStack> SubMenuItemList() {
+    public static ArrayList<ItemStack> subMenuItemList() {
 
         ArrayList<ItemStack> list = new ArrayList<>(0);
-        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+        FileConfiguration info = craftTableShop.getInstance().getConfig();
 
-        if (CTSItemInfo.TitleReturner().equals("null")) return list;
-        for (String s : info.getConfigurationSection(CTSItemInfo.TitleReturner()).getKeys(false)) {
+        if (CTSItemInfo.titleReturner().equals("null")) return list;
+        for (String s : info.getConfigurationSection(CTSItemInfo.titleReturner()).getKeys(false)) {
 
             if (s == null) continue;
             if (s.equals("Item")) continue;
 
-            ItemStack itemStack = info.getItemStack(CTSItemInfo.TitleReturner() + "." + s + ".Item");
+            ItemStack itemStack = info.getItemStack(CTSItemInfo.titleReturner() + "." + s + ".Item");
 
             list.add(itemStack);
         }
         return list;
     }
 
-    public static ArrayList<ItemStack> CraftMenuItemList() {
+    public static ArrayList<ItemStack> craftMenuItemList() {
 
         ArrayList<ItemStack> list = new ArrayList<>(0);
-        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+        FileConfiguration info = craftTableShop.getInstance().getConfig();
 
-        if (CTSItemInfo.TitleReturner().equals("null")) return list;
-        for (String s : info.getConfigurationSection(CTSItemInfo.TitleReturner()).getKeys(false)) {
+        if (CTSItemInfo.titleReturner().equals("null")) return list;
+        for (String s : info.getConfigurationSection(CTSItemInfo.titleReturner()).getKeys(false)) {
 
             if (s == null) continue;
             if (s.equals("Item")) continue;
             if (s.equals("end")) continue;
 
-            ItemStack itemStack = info.getItemStack(CTSItemInfo.TitleReturner() + "." + s + ".Item");
+            ItemStack itemStack = info.getItemStack(CTSItemInfo.titleReturner() + "." + s + ".Item");
 
             list.add(itemStack);
         }
@@ -78,12 +78,12 @@ public class CTSItem {
     }
 
 
-    public static Inventory MainMenu() {
+    public static Inventory mainMenu() {
 
         Inventory inventory = Bukkit.createInventory(null, 54, "MainCraft");
 
         for (int i = 0; i < 54; i++) {
-            inventory.setItem(i, ItemSlot());
+            inventory.setItem(i, itemSlot());
         }
 
         int count = 0;
@@ -93,17 +93,17 @@ public class CTSItem {
             if (i == 17 || i == 18 || i == 26 || i == 27 || i == 35 || i == 36) continue;
             count++;
 
-            if (MainMenuItemList().size() >= count) inventory.setItem(i, MainMenuItemList().get(count - 1));
+            if (mainMenuItemList().size() >= count) inventory.setItem(i, mainMenuItemList().get(count - 1));
         }
         return inventory;
     }
 
-    public static Inventory SubMenu() {
+    public static Inventory subMenu() {
 
-        Inventory inventory = Bukkit.createInventory(null, 54, CTSItemInfo.TitleReturner());
+        Inventory inventory = Bukkit.createInventory(null, 54, CTSItemInfo.titleReturner());
 
         for (int i = 0; i < 54; i++) {
-            inventory.setItem(i, ItemSlot());
+            inventory.setItem(i, itemSlot());
         }
 
         int count = 0;
@@ -111,18 +111,18 @@ public class CTSItem {
 
             if (i == 17 || i == 18 || i == 26 || i == 27 || i == 35 || i == 36) continue;
 
-            if (SubMenuItemList().size() > count ) inventory.setItem(i, SubMenuItemList().get(count));
+            if (subMenuItemList().size() > count ) inventory.setItem(i, subMenuItemList().get(count));
             count++;
         }
         return inventory;
     }
 
-    public static Inventory CraftMenu() {
+    public static Inventory craftMenu() {
 
-        Inventory inventory = Bukkit.createInventory(null, 54, CTSItemInfo.TitleReturner());
+        Inventory inventory = Bukkit.createInventory(null, 54, CTSItemInfo.titleReturner());
 
         for (int i = 0; i < 54; i++) {
-            inventory.setItem(i, ItemSlot());
+            inventory.setItem(i, itemSlot());
         }
 
         int count = 0;
@@ -130,10 +130,10 @@ public class CTSItem {
 
             if (i == 22 || i == 23 || i == 24 || i == 25 || i == 26 || i == 27 || i == 31 || i == 32|| i == 33 || i == 34 || i == 35 || i == 36) continue;
 
-            if (CraftMenuItemList().size() > count) inventory.setItem(i, CraftMenuItemList().get(count));
+            if (craftMenuItemList().size() > count) inventory.setItem(i, craftMenuItemList().get(count));
             count++;
         }
-        inventory.setItem(34, CraftTableShop.getInstance().getConfig().getItemStack(CTSItemInfo.TitleReturner() + ".end.Item", ItemSlot()));
+        inventory.setItem(34, craftTableShop.getInstance().getConfig().getItemStack(CTSItemInfo.titleReturner() + ".end.Item", itemSlot()));
         return inventory;
     }
 }

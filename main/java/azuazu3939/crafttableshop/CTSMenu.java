@@ -8,21 +8,21 @@ public class CTSMenu {
 
     public static void openMenu(Player player) {
 
-        Inventory inventory = CTSItem.MainMenu();
+        Inventory inventory = CTSItem.mainMenu();
 
         player.openInventory(inventory);
     }
 
     public static void openMenuSub(HumanEntity player) {
 
-        Inventory inventory = CTSItem.SubMenu();
+        Inventory inventory = CTSItem.subMenu();
 
         player.openInventory(inventory);
     }
 
     public static void openMenuCraft(HumanEntity player) {
 
-        Inventory inventory = CTSItem.CraftMenu();
+        Inventory inventory = CTSItem.craftMenu();
 
         player.openInventory(inventory);
     }

@@ -60,7 +60,7 @@ public class CTSCommand implements CommandExecutor {
                         return true;
                     }
 
-                    CraftTableShop.getInstance().getConfig().set("MainCraft." + type + ".Item", itemStack);
+                    craftTableShop.getInstance().getConfig().set("MainCraft." + type + ".Item", itemStack);
                     reload();
 
                     sender.sendMessage(ChatColor.GREEN + "手に持っているアイテムを" + type + "に登録しました。");
@@ -110,12 +110,12 @@ public class CTSCommand implements CommandExecutor {
                         return true;
                     }
 
-                    if (!(CraftTableShop.getInstance().getConfig().isSet("MainCraft" + set + ".Item"))) {
+                    if (!(craftTableShop.getInstance().getConfig().isSet("MainCraft" + set + ".Item"))) {
                         playername.sendMessage(ChatColor.RED + set + "は登録されていません。");
                         return true;
                     }
 
-                    ItemStack itemStack = CraftTableShop.getInstance().getConfig().getItemStack("MainCraft." + set + ".Item");
+                    ItemStack itemStack = craftTableShop.getInstance().getConfig().getItemStack("MainCraft." + set + ".Item");
 
                     playername.getInventory().addItem(itemStack);
                     playername.sendMessage(ChatColor.GREEN + set + "内のアイテムを取得しました。");
@@ -132,7 +132,7 @@ public class CTSCommand implements CommandExecutor {
 
                     type = args[1];
 
-                    CraftTableShop.getInstance().getConfig().set(type, null);
+                    craftTableShop.getInstance().getConfig().set(type, null);
                     reload();
                     return true;
 
@@ -163,8 +163,8 @@ public class CTSCommand implements CommandExecutor {
 
     private void reload() {
 
-        CraftTableShop.getInstance().saveConfig();
-        CraftTableShop.getInstance().saveDefaultConfig();
-        CraftTableShop.getInstance().reloadConfig();
+        craftTableShop.getInstance().saveConfig();
+        craftTableShop.getInstance().saveDefaultConfig();
+        craftTableShop.getInstance().reloadConfig();
     }
 }
