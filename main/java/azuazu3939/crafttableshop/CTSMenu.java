@@ -1,31 +1,29 @@
 package azuazu3939.crafttableshop;
 
-import org.bukkit.ChatColor;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 public class CTSMenu {
 
-    public static void openMenuMain(Player player) {
+    public static void openMenu(Player player) {
 
-        Inventory inventoryType = CTSItem.MainMenu();
+        Inventory inventory = CTSItem.MainMenu();
 
-        player.openInventory(inventoryType);
+        player.openInventory(inventory);
     }
 
-    public static Inventory openMenuSub() {
+    public static void openMenuSub(HumanEntity player) {
 
         Inventory inventory = CTSItem.SubMenu();
-        CTSCancelEvent.CLICK_PLAYER.openInventory(inventory);
 
-        return inventory;
+        player.openInventory(inventory);
     }
 
-    public static Inventory openMenuCraft() {
+    public static void openMenuCraft(HumanEntity player) {
 
         Inventory inventory = CTSItem.CraftMenu();
-        CTSCancelEvent.CLICK_PLAYER.openInventory(inventory);
 
-        return inventory;
+        player.openInventory(inventory);
     }
 }

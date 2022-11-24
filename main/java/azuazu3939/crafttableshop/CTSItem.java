@@ -1,29 +1,18 @@
 package azuazu3939.crafttableshop;
 
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.items.MythicItem;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class CTSItem {
 
-    static Material other = Material.valueOf(CraftTableShop.getInstance().getMenuConfig().getConfig().getString("other", "GRAY_STAINED_GLASS_PANE"));
-    static ItemStack itemStackA = CraftMenuItemA();
-    static ItemStack itemStackB = CraftMenuItemB();
-    static ItemStack itemStackC = CraftMenuItemC();
-    static ItemStack itemStackD = CraftMenuItemD();
-    static ItemStack itemStackE = CraftMenuItemE();
-    static ItemStack itemStackF = CraftMenuItemF();
-    static ItemStack itemStackG = CraftMenuItemG();
-    static ItemStack itemStackH = CraftMenuItemH();
-    static ItemStack itemStackI = CraftMenuItemI();
+    static Material other = Material.GRAY_STAINED_GLASS_PANE;
 
     public static ItemStack ItemSlot() {
 
@@ -38,12 +27,50 @@ public class CTSItem {
     public static ArrayList<ItemStack> MainMenuItemList() {
 
         ArrayList<ItemStack> list = new ArrayList<>();
+        FileConfiguration info = CraftTableShop.getInstance().getConfig();
 
-        for (String string : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("MainMenu").getKeys(false)) {
+        for (String string : info.getConfigurationSection("MainCraft").getKeys(false)) {
 
             if (string == null) continue;
 
-            ItemStack itemStack = CraftTableShop.getInstance().getMenuConfig().getConfig().getItemStack("MainMenu." + string);
+            ItemStack itemStack = info.getItemStack("MainCraft." + string + ".Item");
+
+            list.add(itemStack);
+        }
+        return list;
+    }
+
+    public static ArrayList<ItemStack> SubMenuItemList() {
+
+        ArrayList<ItemStack> list = new ArrayList<>(0);
+        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+
+        if (CTSItemInfo.TitleReturner().equals("null")) return list;
+        for (String s : info.getConfigurationSection(CTSItemInfo.TitleReturner()).getKeys(false)) {
+
+            if (s == null) continue;
+            if (s.equals("Item")) continue;
+
+            ItemStack itemStack = info.getItemStack(CTSItemInfo.TitleReturner() + "." + s + ".Item");
+
+            list.add(itemStack);
+        }
+        return list;
+    }
+
+    public static ArrayList<ItemStack> CraftMenuItemList() {
+
+        ArrayList<ItemStack> list = new ArrayList<>(0);
+        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+
+        if (CTSItemInfo.TitleReturner().equals("null")) return list;
+        for (String s : info.getConfigurationSection(CTSItemInfo.TitleReturner()).getKeys(false)) {
+
+            if (s == null) continue;
+            if (s.equals("Item")) continue;
+            if (s.equals("end")) continue;
+
+            ItemStack itemStack = info.getItemStack(CTSItemInfo.TitleReturner() + "." + s + ".Item");
 
             list.add(itemStack);
         }
@@ -51,182 +78,9 @@ public class CTSItem {
     }
 
 
-    public static ArrayList<ItemStack> SubMenuItemList() {
-
-        ArrayList<ItemStack> list = new ArrayList<>();
-
-        for (String string : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (string == null) continue;
-
-            for (String string2 : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu." + string).getKeys(false)) {
-
-                if (string2 == null) continue;
-                if (!SubTitleReturner().equalsIgnoreCase(string)) continue;
-
-                ItemStack itemStack = CraftTableShop.getInstance().getMenuConfig().getConfig().getItemStack("SubMenu." + string + "." + string2, ItemSlot());
-
-                list.add(itemStack);
-            }
-        }
-        return list;
-    }
-
-    public static ItemStack CraftMenuItemA() {
-
-        for (String link : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (link == null) continue;
-
-            for (String string3 : CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getConfigurationSection("CraftRecipe").getKeys(false)) {
-
-                if (string3 == null) continue;
-                if (CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".a")) == null) continue;
-
-                return CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".a"));
-            }
-        }
-        return ItemSlot();
-    }
-
-    public static ItemStack CraftMenuItemB() {
-
-        for (String link : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (link == null) continue;
-
-            for (String string3 : CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getConfigurationSection("CraftRecipe").getKeys(false)) {
-
-                if (string3 == null) continue;
-                if (CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".b")) == null) continue;
-
-                return CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".b"));
-            }
-        }
-        return ItemSlot();
-    }
-
-    public static ItemStack CraftMenuItemC() {
-
-        for (String link : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (link == null) continue;
-
-            for (String string3 : CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getConfigurationSection("CraftRecipe").getKeys(false)) {
-
-                if (string3 == null) continue;
-                if (CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".c")) == null) continue;
-
-                return CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".c"));
-            }
-        }
-        return ItemSlot();
-    }
-
-    public static ItemStack CraftMenuItemD() {
-
-        for (String link : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (link == null) continue;
-
-            for (String string3 : CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getConfigurationSection("CraftRecipe").getKeys(false)) {
-
-                if (string3 == null) continue;
-                if (CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".d")) == null) continue;
-
-                return CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".d"));
-            }
-        }
-        return ItemSlot();
-    }
-
-    public static ItemStack CraftMenuItemE() {
-
-        for (String link : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (link == null) continue;
-
-            for (String string3 : CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getConfigurationSection("CraftRecipe").getKeys(false)) {
-
-                if (string3 == null) continue;
-                if (CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".e")) == null) continue;
-
-                return CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".e"));
-            }
-        }
-        return ItemSlot();
-    }
-
-    public static ItemStack CraftMenuItemF() {
-
-        for (String link : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (link == null) continue;
-
-            for (String string3 : CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getConfigurationSection("CraftRecipe").getKeys(false)) {
-
-                if (string3 == null) continue;
-                if (CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".f")) == null) continue;
-
-                return CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".f"));
-            }
-        }
-        return ItemSlot();
-    }
-
-    public static ItemStack CraftMenuItemG() {
-
-        for (String link : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (link == null) continue;
-
-            for (String string3 : CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getConfigurationSection("CraftRecipe").getKeys(false)) {
-
-                if (string3 == null) continue;
-                if (CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".g")) == null) continue;
-                return CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".g"));
-            }
-        }
-        return ItemSlot();
-    }
-
-    public static ItemStack CraftMenuItemH() {
-
-        for (String link : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (link == null) continue;
-
-            for (String string3 : CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getConfigurationSection("CraftRecipe").getKeys(false)) {
-
-                if (string3 == null) continue;
-                if (CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".h")) == null) continue;
-
-                return CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".h"));
-            }
-        }
-        return ItemSlot();
-    }
-
-    public static ItemStack CraftMenuItemI() {
-
-        for (String link : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (link == null) continue;
-
-            for (String string3 : CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getConfigurationSection("CraftRecipe").getKeys(false)) {
-
-                if (string3 == null) continue;
-                if (CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".i")) == null) continue;
-
-                return CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + link + "." + CraftTableShop.getInstance().getCraftRecipeConfig().getConfig().getString("CraftRecipe." + string3 + ".i"));
-            }
-        }
-        return ItemSlot();
-    }
-
     public static Inventory MainMenu() {
 
-        Inventory inventory = Bukkit.createInventory(null, 54, "CTSMenu");
+        Inventory inventory = Bukkit.createInventory(null, 54, "MainCraft");
 
         for (int i = 0; i < 54; i++) {
             inventory.setItem(i, ItemSlot());
@@ -236,7 +90,7 @@ public class CTSItem {
         int i;
         for (i = 10; i < 44; i++) {
 
-            if (i == 17 || i == 18 || i == 26 || i == 27 || i == 35 || i == 36 || i == 44 || i == 45) continue;
+            if (i == 17 || i == 18 || i == 26 || i == 27 || i == 35 || i == 36) continue;
             count++;
 
             if (MainMenuItemList().size() >= count) inventory.setItem(i, MainMenuItemList().get(count - 1));
@@ -246,174 +100,40 @@ public class CTSItem {
 
     public static Inventory SubMenu() {
 
-        Inventory inventory = Bukkit.createInventory(null, 54, SubTitleReturner());
+        Inventory inventory = Bukkit.createInventory(null, 54, CTSItemInfo.TitleReturner());
 
         for (int i = 0; i < 54; i++) {
             inventory.setItem(i, ItemSlot());
         }
 
         int count = 0;
-        int i;
-        for (i = 10; i < 44; i++) {
+        for (int i = 10; i < 44; i++) {
 
-            if (i == 17 || i == 18 || i == 26 || i == 27 || i == 35 || i == 36 || i == 44 || i == 45) continue;
+            if (i == 17 || i == 18 || i == 26 || i == 27 || i == 35 || i == 36) continue;
+
+            if (SubMenuItemList().size() > count ) inventory.setItem(i, SubMenuItemList().get(count));
             count++;
-
-            if (SubMenuItemList().size() >= count) inventory.setItem(i, SubMenuItemList().get(count - 1));
         }
         return inventory;
     }
+
     public static Inventory CraftMenu() {
 
-        Inventory inventory = Bukkit.createInventory(null, 54, CraftTitleReturner());
+        Inventory inventory = Bukkit.createInventory(null, 54, CTSItemInfo.TitleReturner());
 
         for (int i = 0; i < 54; i++) {
             inventory.setItem(i, ItemSlot());
         }
 
-        for (String string : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
+        int count = 0;
+        for (int i = 19; i < 40; i++) {
 
-            if (CTSItemInfo.StringReturner() == null) continue;
-            if (!string.equals(CTSItemInfo.StringReturner())) continue;
-            if (!CTSItemInfo.StringReturner().equals(CTSCancelEvent.CLICKED_MENU)) continue;
+            if (i == 22 || i == 23 || i == 24 || i == 25 || i == 26 || i == 27 || i == 31 || i == 32|| i == 33 || i == 34 || i == 35 || i == 36) continue;
 
-            inventory.setItem(19, itemStackA);
-            inventory.setItem(20, itemStackB);
-            inventory.setItem(21, itemStackC);
-            inventory.setItem(28, itemStackD);
-            inventory.setItem(29, itemStackE);
-            inventory.setItem(30, itemStackF);
-            inventory.setItem(37, itemStackG);
-            inventory.setItem(38, itemStackH);
-            inventory.setItem(39, itemStackI);
-
-            inventory.setItem(32, ItemSlot());
-            ItemStack itemStack = CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + string + "." + CTSItemInfo.StringReturnerToItem());
-            inventory.setItem(34, itemStack);
+            if (CraftMenuItemList().size() > count) inventory.setItem(i, CraftMenuItemList().get(count));
+            count++;
         }
+        inventory.setItem(34, CraftTableShop.getInstance().getConfig().getItemStack(CTSItemInfo.TitleReturner() + ".end.Item", ItemSlot()));
         return inventory;
-    }
-
-    public static boolean MainMenuItemName() {
-
-        for (String s : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("MainMenu").getKeys(false)) {
-
-            if (s == null) continue;
-            if (CTSCancelEvent.CLICKED_MENU.equals(s)) {
-
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean SubMenuItemName() {
-
-
-        for (String s : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (s == null) continue;
-
-            for (String s1 : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu." + s).getKeys(false)) {
-
-                if (s1 == null) continue;
-                if (CTSCancelEvent.CLICKED_MENU.equals(s1)) {
-
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public static boolean CraftMenuItemName() {
-
-        for (String s : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData").getKeys(false)) {
-
-            for (String s1 : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData." + s).getKeys(false)) {
-
-                if (CTSCancelEvent.CLICK_ITEM.isSimilar(CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + s + "." + s1))) {
-
-                    return true;
-                }
-
-                for (MythicItem mythicItem : MythicMobs.inst().getItemManager().getItems()) {
-
-                    if (Objects.equals(CraftTableShop.getInstance().getSetUpConfig().getConfig().getString("CraftData." + s + "." + s1), mythicItem.getInternalName())) {
-
-                        if (MythicMobs.inst().getItemManager().getItemStack(mythicItem.getInternalName()).isSimilar(CTSCancelEvent.CLICK_ITEM))
-                            return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    //下は動作確認
-    public static boolean MainMenuClickItemList() {
-
-
-        for (String string : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("MainMenu").getKeys(false)) {
-
-            ItemStack itemStack = CraftTableShop.getInstance().getMenuConfig().getConfig().getItemStack("MainMenu" + "." + string);
-
-            if (CTSCancelEvent.CLICK_ITEM.isSimilar(itemStack)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    //下は動作確認
-    public static boolean SubMenuClickItemList() {
-
-        for (String string : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            for (String string2 : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu" + "." + string).getKeys(false)) {
-
-                ItemStack itemStack = CraftTableShop.getInstance().getMenuConfig().getConfig().getItemStack("SubMenu" + "." + string + "." + string2);
-
-                if (CTSCancelEvent.CLICK_ITEM.isSimilar(itemStack)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    //下は動作確認
-    public static String SubTitleReturner() {
-
-        for (String s : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("MainMenu").getKeys(false)) {
-
-            if (s == null) continue;
-
-            if (CTSCancelEvent.CLICK_ITEM.isSimilar(CraftTableShop.getInstance().getMenuConfig().getConfig().getItemStack("MainMenu." + s))) {
-
-                return s;
-            }
-        }
-        return "これをTitleにしないで";
-    }
-
-    //下は動作確認
-    public static String CraftTitleReturner() {
-
-        for (String s : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu").getKeys(false)) {
-
-            if (s == null) continue;
-
-            for (String s1 : CraftTableShop.getInstance().getMenuConfig().getConfig().getConfigurationSection("SubMenu." + s ).getKeys(false)) {
-
-                if (s1 == null) continue;
-
-                if (CTSCancelEvent.CLICK_ITEM.isSimilar(CraftTableShop.getInstance().getMenuConfig().getConfig().getItemStack("SubMenu." + s + "." + s1))) {
-
-                    return s1;
-                }
-            }
-        }
-        return "これをTitleにしないで";
     }
 }

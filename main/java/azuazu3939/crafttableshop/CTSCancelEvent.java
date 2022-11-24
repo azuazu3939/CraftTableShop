@@ -1,6 +1,5 @@
 package azuazu3939.crafttableshop;
 
-import org.bukkit.Sound;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,71 +11,46 @@ public class CTSCancelEvent implements Listener {
 
     static HumanEntity CLICK_PLAYER;
     static ItemStack CLICK_ITEM;
-    static String CLICKED_MENU;
+    static String CLICK_MENU;
 
     @EventHandler
     public void onInvClick(InventoryClickEvent event) {
 
         CLICK_ITEM = event.getCurrentItem();
         CLICK_PLAYER = event.getWhoClicked();
-        CLICKED_MENU = event.getView().getTitle();
 
+        if (event.getView().getTitle() == null) return;
+
+        CLICK_MENU = event.getView().getTitle();
+
+        if (CTSItemInfo.checkTitleReturner() == null || CTSItemInfo.checkTitleReturner().equals("null")) return;
         if (CLICK_ITEM == null) return;
-        if (CLICKED_MENU == null) return;
-        if ((event.getView().getTitle().equals("CTSMenu") || CTSItem.MainMenuItemName() || CTSItem.SubMenuItemName())) {
+        if (!CTSItemInfo.checkTitleReturner().equals(CLICK_MENU)) return;
 
-            event.setCancelled(true);
+        event.setCancelled(true);
 
-            if (CTSItem.MainMenuClickItemList()) {
+        if (CTSItemInfo.TitleReturner() == null || CTSItemInfo.TitleReturner().equals("null")) return;
+        if (CTSItemInfo.ItemReturner(CLICK_ITEM, CLICK_MENU) || CTSItemInfo.SubOrCraftReturner().equals("true") && !CTSItemInfo.SubOrCraftReturner().equals("true2")) {
 
-                CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1F, 1.5F);
-                CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1F, 1.5F);
-                CLICK_PLAYER.openInventory(CTSMenu.openMenuSub());
-            }
-            if (CTSItem.SubMenuClickItemList()) {
+            CLICK_PLAYER.sendMessage("おめ");
+            CTSMenu.openMenuSub(CLICK_PLAYER);
+            return;
+        }
 
-                CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1F, 1.5F);
-                CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 1F, 1.5F);
-                CLICK_PLAYER.openInventory(CTSMenu.openMenuCraft());
-            }
-            if (CTSItem.CraftMenuItemName() || event.getSlot() == 34) {
+        if (CTSItemInfo.ItemReturner(CLICK_ITEM, CLICK_MENU) || CTSItemInfo.SubOrCraftReturner().equals("true2") && !CTSItemInfo.SubOrCraftReturner().equals("true")) {
 
-                for (String string : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData").getKeys(false)) {
-
-                    if (string == null) continue;
-
-                    for (String string2 : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData." + string).getKeys(false)) {
-
-                        if (string2 == null) continue;
-
-                        if (CLICK_ITEM.isSimilar(CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack("CraftData." + string + "." + string2))) {
-
-                            if (CheckHasItems.hasItemTestA(string) &&
-                                    CheckHasItems.hasItemTestB(string) &&
-                                    CheckHasItems.hasItemTestC(string) &&
-                                    CheckHasItems.hasItemTestD(string) &&
-                                    CheckHasItems.hasItemTestE(string) &&
-                                    CheckHasItems.hasItemTestF(string) &&
-                                    CheckHasItems.hasItemTestG(string) &&
-                                    CheckHasItems.hasItemTestH(string) &&
-                                    CheckHasItems.hasItemTestI(string)) {
-
-                                CLICK_PLAYER.getWorld().playSound(CLICK_PLAYER.getLocation(), Sound.BLOCK_NOTE_BLOCK_HARP, 5F, 0.5F);
-                                CLICK_PLAYER.sendMessage("おめ");
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
+            CLICK_PLAYER.sendMessage("おめ");
+            CTSMenu.openMenuCraft(CLICK_PLAYER);
         }
     }
 
     @EventHandler
     public void onInvDrag(InventoryDragEvent event) {
 
-        if (event.getView().getTitle().equals("Menu") || CTSItem.MainMenuItemName() || CTSItem.SubMenuItemName())
+        if (CTSItemInfo.checkTitleReturner() == null || CTSItemInfo.checkTitleReturner().equals("null")) return;
+        if (CLICK_ITEM == null) return;
+        if (!CTSItemInfo.checkTitleReturner().equals(CLICK_MENU)) return;
 
-            event.setCancelled(true);
+        event.setCancelled(true);
     }
 }

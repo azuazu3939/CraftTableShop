@@ -1,68 +1,100 @@
 package azuazu3939.crafttableshop;
 
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.items.MythicItem;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Objects;
 
 
 public class CTSItemInfo {
     //完璧
-    public static ItemStack ItemReturner(String itemString) {
 
-        for (String string : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData").getKeys(false)) {
+    public static boolean ItemReturner(ItemStack item, String group) { //そのTitleがある場合trueを返す奴
 
-            for (MythicItem mythicItem : MythicMobs.inst().getItemManager().getItems()) {
+        FileConfiguration info = CraftTableShop.getInstance().getConfig();
 
-                if (Objects.equals(CraftTableShop.getInstance().getSetUpConfig().getConfig().getString("CraftData." + string + "." + itemString), mythicItem.getInternalName())) {
+        if (group == null) return false;
+        for (String string : info.getConfigurationSection(group).getKeys(false)) {
 
-                    return MythicMobs.inst().getItemManager().getItemStack(mythicItem.getInternalName());
+            if (string == null) continue;
+            if (string.equals("a") || string.equals("b") || string.equals("c") || string.equals("d") || string.equals("e") ||
+                    string.equals("f") || string.equals("g") || string.equals("h") || string.equals("i") || string.equals("end")) return false;
+            if (info.getItemStack(group + "." + string + ".Item").isSimilar(item)) return true;
+        }
+        return false;
+    }
+
+    public static String TitleReturner() {  //次のTitleを返すやつ
+
+        String s = "null";
+        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+        String string = CTSCancelEvent.CLICK_MENU;
+
+        for (String str : info.getConfigurationSection("MainCraft").getKeys(false)) {
+
+            if (str == null) continue;
+            if (str.equals("Item")) continue;
+            if (string.equals("MainCraft")) {
+
+                if (info.getItemStack("MainCraft." + str + ".Item").isSimilar(CTSCancelEvent.CLICK_ITEM))
+                    return "MainCraft." + str;
+            }
+            for (String str1 : info.getConfigurationSection("MainCraft." + str).getKeys(false)) {
+
+                if (str1 == null) continue;
+                if (str1.equals("Item")) continue;
+                if (string.equals("MainCraft." + str)) {
+                    if (info.getItemStack("MainCraft." + str + "." + str1 + ".Item").isSimilar(CTSCancelEvent.CLICK_ITEM))
+                        return "MainCraft." + str + "." + str1;
                 }
+                if (string.equals("MainCraft." + str + "." + str1)) return s;
             }
         }
-        return CraftTableShop.getInstance().getSetUpConfig().getConfig().getItemStack(itemString);
+
+        return s;
     }
-    public static String StringReturner() {
 
-        String s = null;
+    public static String checkTitleReturner() { //今のTitleを確認し返す奴
 
-        FileConfiguration info = CraftTableShop.getInstance().getCraftRecipeConfig().getConfig();
+        String s = "null";
+        FileConfiguration info = CraftTableShop.getInstance().getConfig();
+        String string = CTSCancelEvent.CLICK_MENU;
 
-        for (String string : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData").getKeys(false)) {
+        if (string.equals("MainCraft")) return "MainCraft";
+        if (string == null) return s;
+        for (String s1 : info.getConfigurationSection("MainCraft").getKeys(false)) {
 
-            for (String string2 : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData." + string).getKeys(false)) {
+            if (s1 == null) continue;
+            if (!string.equals("MainCraft." + s1)) continue;
+            for (String str : info.getConfigurationSection("MainCraft." + s1).getKeys(false)) {
 
-                for (String string3 : info.getConfigurationSection("CraftRecipe").getKeys(false)) {
+                if (str == null) continue;
 
-                    if (string3 == null) continue;
-                    if (!(string3.equals(string2))) continue;
+                return "MainCraft." + s1;
+            }
+        }
+        for (String s1 : info.getConfigurationSection("MainCraft").getKeys(false)) {
 
-                    return string;
-                }
+            if (s1 == null) continue;
+            for (String s2 : info.getConfigurationSection("MainCraft." + s1).getKeys(false)) {
+
+                if (s2 == null) continue;
+                if (!string.equals("MainCraft." + s1 + "." + s2)) continue;
+                return "MainCraft." + s1 + "." + s2;
             }
         }
         return s;
     }
 
-    public static String StringReturnerToItem() {
+    public static String SubOrCraftReturner() {
 
-        String s = null;
+        String s = "null";
+        FileConfiguration info = CraftTableShop.getInstance().getConfig();
 
-        FileConfiguration info = CraftTableShop.getInstance().getCraftRecipeConfig().getConfig();
+        for (String s1 : info.getConfigurationSection("MainCraft").getKeys(false)) {
 
-        for (String string : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData").getKeys(false)) {
+            if (checkTitleReturner().equals("MainCraft." + s1)) return "true";
+            for (String s2: info.getConfigurationSection("MainCraft." + s1).getKeys(false)) {
 
-            for (String string2 : CraftTableShop.getInstance().getSetUpConfig().getConfig().getConfigurationSection("CraftData." + string).getKeys(false)) {
-
-                for (String string3 : info.getConfigurationSection("CraftRecipe").getKeys(false)) {
-
-                    if (string3 == null) continue;
-                    if (!(string3.equals(string2))) continue;
-
-                    return string2;
-                }
+                if (checkTitleReturner().equals("MainCraft." +s1 + "." + s2)) return "true2";
             }
         }
         return s;
