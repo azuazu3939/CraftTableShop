@@ -16,16 +16,16 @@ public class CTSMenu {
 
     public void openMenu(Player player) {
 
-        player.openInventory(CheckInvHolder.getInstance().CTSInventory(CheckInvHolder.getInstance().createInvMain()));
+        player.openInventory(CheckInvHolder.getInstance().CTSInventory(CheckInvHolder.getInstance().createInvMain("MainCraft", player)));
     }
 
-    public void openMenuSub(HumanEntity player) {
+    public void openMenuSub(Player player) {
 
-       player.openInventory(CheckInvHolder.getInstance().CTSInventory(CheckInvHolder.getInstance().createInvSub()));
+       player.openInventory(CheckInvHolder.getInstance().CTSInventory(CheckInvHolder.getInstance().createInvSub(CTSItemInfo.getInstance().titleSubReturner(), player)));
     }
 
-    public void openMenuCraft(HumanEntity player) {
+    public void openMenuCraft(Player player) {
 
-        player.openInventory(CheckInvHolder.getInstance().CTSInventory(CheckInvHolder.getInstance().createInvCraft()));
+        player.openInventory(CheckInvHolder.getInstance().CTSInventory(CheckInvHolder.getInstance().createInvCraft(CTSItemInfo.getInstance().titleCraftReturner(), player)));
     }
 }

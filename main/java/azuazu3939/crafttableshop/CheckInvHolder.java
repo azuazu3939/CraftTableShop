@@ -1,6 +1,8 @@
 package azuazu3939.crafttableshop;
 
+import io.lumine.xikage.mythicmobs.utils.adventure.text.format.Style;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 
@@ -16,19 +18,19 @@ public class CheckInvHolder {
         return holder;
     }
 
-    public Inventory createInvMain() {
+    public Inventory createInvMain(String title, Player player) {
 
-        return Bukkit.createInventory(new CTSInvMain(CTSCommand.playername), 54, "MainCraft");
+        return Bukkit.createInventory(new CTSInvMain(player), 54, title);
     }
 
-    public Inventory createInvSub() {
+    public Inventory createInvSub(String title, Player player) {
 
-        return Bukkit.createInventory(new CTSInvSub(CTSCancelEvent.CLICK_PLAYER), 54, CTSItemInfo.getInstance().titleSubReturner());
+        return Bukkit.createInventory(new CTSInvSub(player), 54, title);
     }
 
-    public Inventory createInvCraft() {
+    public Inventory createInvCraft(String title, Player player) {
 
-        return Bukkit.createInventory(new CTSInvCraft(CTSCancelEvent.CLICK_PLAYER), 54, CTSItemInfo.getInstance().titleCraftReturner());
+        return Bukkit.createInventory(new CTSInvCraft(player), 54, title);
     }
 
     public Inventory CTSInventory(Inventory inventory) {

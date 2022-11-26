@@ -1,6 +1,7 @@
 package azuazu3939.crafttableshop;
 
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -29,14 +30,16 @@ public class CTSCancelEvent implements Listener {
 
         event.setCancelled(true);
 
+        Player player = (Player) CLICK_PLAYER;
+
         if (CTSItemInfo.getInstance().itemReturner(CLICK_ITEM, CLICK_MENU) && CTSItemInfo.getInstance().subOrCraftReturner().equals("true")) {
 
-            CTSMenu.getInstance().openMenuSub(CLICK_PLAYER);
+            CTSMenu.getInstance().openMenuSub(player);
         }
 
         if (CTSItemInfo.getInstance().itemReturner(CLICK_ITEM, CLICK_MENU) && CTSItemInfo.getInstance().subOrCraftReturner().equals("true2")) {
 
-            CTSMenu.getInstance().openMenuCraft(CLICK_PLAYER);
+            CTSMenu.getInstance().openMenuCraft(player);
         }
         if (event.getSlot() == 34 && CTSItemInfo.getInstance().subOrCraftReturner().equals("true3")) {
 
