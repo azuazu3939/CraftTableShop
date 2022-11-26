@@ -5,8 +5,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.NotNull;
 
-import static azuazu3939.crafttableshop.CTSCancelEvent.CLICK_PLAYER;
-
 public class CTSInvSub implements InventoryHolder {
 
     HumanEntity player;

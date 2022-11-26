@@ -15,8 +15,9 @@ public class CTSCommand implements CommandExecutor {
 
     String string;
     String type;
-    Player playername;
+    static Player playername;
     String set;
+
 
     //完成
     @Override
@@ -59,7 +60,7 @@ public class CTSCommand implements CommandExecutor {
                         return true;
                     }
 
-                    craftTableShop.getInstance().getConfig().set("MainCraft." + type + ".Item", itemStack);
+                    CraftTableShop.getInstance().getConfig().set("MainCraft." + type + ".Item", itemStack);
                     reload();
 
                     sender.sendMessage(ChatColor.GREEN + "手に持っているアイテムを" + type + "に登録しました。");
@@ -85,7 +86,7 @@ public class CTSCommand implements CommandExecutor {
                         return true;
                     }
 
-                    CTSMenu.openMenu(playername);
+                    CTSMenu.getInstance().openMenu(playername);
                     return true;
 
                 } catch (Exception e) {
@@ -109,12 +110,12 @@ public class CTSCommand implements CommandExecutor {
                         return true;
                     }
 
-                    if (!(craftTableShop.getInstance().getConfig().isSet("MainCraft." + set + ".Item"))) {
+                    if (!(CraftTableShop.getInstance().getConfig().isSet("MainCraft." + set + ".Item"))) {
                         playername.sendMessage(ChatColor.RED + set + "は登録されていません。");
                         return true;
                     }
 
-                    ItemStack itemStack = craftTableShop.getInstance().getConfig().getItemStack("MainCraft." + set + ".Item");
+                    ItemStack itemStack = CraftTableShop.getInstance().getConfig().getItemStack("MainCraft." + set + ".Item");
 
                     playername.getInventory().addItem(itemStack);
                     playername.sendMessage(ChatColor.GREEN + set + "内のアイテムを取得しました。");
@@ -131,7 +132,7 @@ public class CTSCommand implements CommandExecutor {
 
                     type = args[1];
 
-                    craftTableShop.getInstance().getConfig().set(type, null);
+                    CraftTableShop.getInstance().getConfig().set(type, null);
                     reload();
                     return true;
 
@@ -162,8 +163,8 @@ public class CTSCommand implements CommandExecutor {
 
     private void reload() {
 
-        craftTableShop.getInstance().saveConfig();
-        craftTableShop.getInstance().saveDefaultConfig();
-        craftTableShop.getInstance().reloadConfig();
+        CraftTableShop.getInstance().saveConfig();
+        CraftTableShop.getInstance().saveDefaultConfig();
+        CraftTableShop.getInstance().reloadConfig();
     }
 }
